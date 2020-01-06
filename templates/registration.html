@@ -16,22 +16,23 @@
 </head>
 <body>
     <div id="logreg-forms" class="container">
-        <form class="form-signin" method="post" action="{% url 'EmployeeStore' %}">
+        <form class="form-signin" method="post" action="{% url 'save_emplyee' %}">
             {% csrf_token %} 
             <div class="row ml-2 mt-5">
             {% for field in form %} 
 	           
 	            	<div class="col-sm-4 mb-3">
 	            		{{field.label_tag}}
-	            		<input type="email" id="inputEmail" name="{{field.name}}" class="form-control" placeholder="" autofocus="">
+	            		<input id="inputEmail" name="{{field.name}}" class="form-control" placeholder="" autofocus="">
+                        <p style="" class="">{{field.errors}}</p>
 	            	</div>
 	           	
-            {% endfor %}
+            {% endfor %}            
         </div>
             <!-- <p>Don't have an account!</p>  -->
             <div class="row">
             	<div class="col-sm-12 text-center">
-            		<button class="btn btn-primary" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up</button>
+            		<input value="Sign up" class="btn btn-primary" type="submit" id="btn-signup">
             	</div>
             </div>
             </form>
@@ -40,3 +41,10 @@
     </div>    
 </body>
 </html>
+
+<style type="text/css">
+    .errorlist li {
+        color: red; 
+        font-size:10px
+    }
+</style>

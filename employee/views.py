@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+from django.contrib.auth import authenticate,login,logout
 from .forms import SignUpForm
+from django.contrib.auth.models import User
+
 
 
 class HomePage:
@@ -36,11 +39,21 @@ class HomePage:
 		return render(request, "registration.html",{'form':form})
 
 	def Store(request):	
-		form = SignUpForm(request)
-		if form.is_valid:
-			pass
+		form = SignUpForm(request.POST)
+		if request.POST:
+			if form.is_valid():
+				user = form.save()
+				# form.refresh_from_db()
+				raw_password = form.cleaned_data.get('password1')
+				user = authenticate(username=user.username, password=raw_password)
+				login(request, user)
+				if request.user.is_authenticated:
+					return HttpResponse(request.user.username)
+					# return redirect('/class')
+			else:
+				return render(request, "registration.html",{'form':form})
 		else:
-			return HttpResponse(form.errors)
+			return render(request, "registration.html",{'form':form}) 		
     	
 
 
