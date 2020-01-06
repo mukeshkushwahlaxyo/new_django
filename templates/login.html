@@ -1,0 +1,52 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>Bootstrap 4 Login/Register Form</title>
+</head>
+<body>
+    <div id="logreg-forms" class="container">
+        <form class="form-signin" method="post" action="{% url 'checkLogin' %}">
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+            <div class="social-login" style="text-align: center">
+                <a href="{% url 'singhupEmployee'  %}" class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Employee Sign in </span> </a>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
+            </div>
+            <p style="text-align:center"> OR  </p>
+            {% csrf_token %} 
+            {% for field in form %} 
+	            <div class="row ml-2">
+	            	<div class="col-sm-4 offset-4 mb-3">
+	            		<input type="email" id="inputEmail" name="{{field.name}}" class="form-control" placeholder="{{field.name}}" autofocus="">
+	            	</div>
+	            </div>	
+            {% endfor %}
+            <p class="text-center danger" style="font: 15px">{{form.errors}}</p>
+            <div class="row">
+            	<div class="col-sm-12 text-center">
+            		<button class="btn btn-success" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>            		
+            		<hr>
+            	</div>
+        	</div>
+            <!-- <p>Don't have an account!</p>  -->
+            <div class="row">
+            	<div class="col-sm-12 text-center">
+            		<button class="btn btn-primary" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
+            	</div>
+            </div>
+            </form>
+            <br>
+            
+    </div>    
+</body>
+</html>
