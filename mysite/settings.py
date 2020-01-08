@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'employee',
+    'rolepermissions',
 ]
 
 MIDDLEWARE = [
@@ -120,6 +121,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+ROLEPERMISSIONS_MODULE = 'mysite.roles'
 
 
 # Static files (CSS, JavaScript, Images)

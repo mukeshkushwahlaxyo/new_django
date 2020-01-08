@@ -19,13 +19,12 @@
         <form class="form-signin" method="post" action="{% url 'save_emplyee' %}">
             {% csrf_token %} 
             <div class="row ml-2 mt-5">
-            {% for field in form %} 
-	           
-	            	<div class="col-sm-4 mb-3">
-	            		{{field.label_tag}}
-	            		<input id="inputEmail" name="{{field.name}}" class="form-control" placeholder="" autofocus="">
-                        <p style="" class="">{{field.errors}}</p>
-	            	</div>
+            {% for field in form %} 	           
+                <div class="col-sm-4 mb-3">
+                    {{field.label_tag}}
+                    <input id="inputEmail" name="{{field.name}}" class="form-control" placeholder="" autofocus="">
+                    <p style="" class="">{{field.errors}}</p>
+                </div>
 	           	
             {% endfor %}            
         </div>
