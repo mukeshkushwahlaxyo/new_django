@@ -21,4 +21,6 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('employee/', include('employee.urls')),
     path('', views.HomePage.login,name='login'),
+    path('logout', views.HomePage.logout_view,name='logout'),
+    path('dashboard', views.HomePage.index,name='dashboard'),
 ]

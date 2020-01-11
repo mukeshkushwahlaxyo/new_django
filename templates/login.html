@@ -17,9 +17,9 @@
 <body>
     <div id="logreg-forms" class="container">
         <form class="form-signin" method="post" action="{% url 'checkLogin' %}">
-            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center "> Sign in</h1>
             <div class="social-login" style="text-align: center">
-                <a href="{% url 'singhupEmployee'  %}" class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Employee Sign in </span> </a>
+                <a style="color: #000; background-color: #f0f0f0" href="{% url 'singhupEmployee'  %}" class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Employee Sign in </span> </a>
                 <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
             </div>
             <p style="text-align:center"> OR  </p>
@@ -27,7 +27,7 @@
             {% for field in form %} 
 	            <div class="row ml-2">
 	            	<div class="col-sm-4 offset-4 mb-3">
-	            		<input type="email" id="inputEmail" name="{{field.name}}" class="form-control" placeholder="{{field.name}}" autofocus="">
+	            		<input type="" id="inputEmail" name="{{field.name}}" class="form-control" placeholder="{{field.name}}" autofocus="">
 	            	</div>
 	            </div>	
             {% endfor %}
