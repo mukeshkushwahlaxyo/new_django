@@ -68,6 +68,9 @@ class HomePage:
 		else:
 			return render(request, "registration.html",{'form':form}) 	
 
+	def employeesIndex(request):
+		return render(request, "employee/index.html")				
+
 	def logout_view(request):
 		logout(request)			
     	
