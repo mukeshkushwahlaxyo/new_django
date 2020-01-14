@@ -5,32 +5,55 @@
     <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="card mt-5 ml-3 mr-3">
-                <div id="logreg-forms" class="container">
-                    <form class="form-signin" method="post" action="{% url 'save_emplyee' %}">
-                        {% csrf_token %} 
-                        <div class="row ml-2 mt-5">
-                        {% for field in form %} 	           
-                            <div class="col-sm-4 mb-3">
-                                {{field.label_tag}}
-                                <input id="inputEmail" name="{{field.name}}" class="form-control" placeholder="" autofocus="">
-                                <p style="" class="text-denger">{{field.errors}}</p>
+                <div id="logreg-forms" class="container" style="background-color: #f2f4f6;">
+                    <div class="form-signin" method="post" action="{% url 'save_emplyee' %}">
+                        <form>
+                            {% csrf_token %} 
+                            <div class="row ml-2 mt-5 ">  
+                                <div class="col-md-3"></div> 
+                                <div class="col-md-6">
+                                    <div class="row formBox">                         
+                                        <div class="col-md-6">
+                                            <label>{{form.first_name.label}}</label>
+                                            <input id="inputEmail" name="{{form.first_name.name}}" class="form-control" placeholder="" autofocus="">
+                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>{{form.last_name.label}}</label>
+                                            <input id="inputEmail" name="{{form.last_name.name}}" class="form-control" placeholder="" autofocus="">
+                                            <p style="" class="text-denger">{{form.username.errors}}</p>
+                                        </div> 
+
+                                        <div class="col-md-12">
+                                            <label>{{form.username.label}}</label>
+                                            <input id="inputEmail" name="{{form.username.name}}" class="form-control" placeholder="" autofocus="">
+                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>{{form.password1.label}}</label>
+                                            <input id="inputEmail" name="{{form.password1.name}}" class="form-control" placeholder="" autofocus="">
+                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                        </div> 
+                                        <div class="col-md-12">
+                                            <label>{{form.password2.label}}</label>
+                                            <input id="inputEmail" name="{{form.password2.name}}" class="form-control" placeholder="" autofocus="">
+                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                        </div> 
+                                  
+                                        <div class="col-md-12 text-center mb-4">
+                                            <input type="submit" value="Submit" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div> 
                             </div>
-                            
-                        {% endfor %}            
+                         </form>
+                             <!-- <p>Don't have an account!</p>  -->           
                     </div>
-                        <!-- <p>Don't have an account!</p>  -->
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <input value="Sign up" class="btn btn-primary" type="submit" id="btn-signup">
-                            </div>
-                        </div>
-                        </form>
-                        <br>           
+                                  
                 </div>   
             </div>
         </div>
     </div>    
-</div>
 <style type="text/css">
     .errorlist li {
         color: red; 

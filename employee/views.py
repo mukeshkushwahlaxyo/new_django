@@ -14,7 +14,6 @@ class HomePage:
 	def index(request):		
 		return render(request, "home.html")
 
-	@login_required
 	def login(request):		
 		form = AuthenticationForm()
 		if request.user.is_authenticated:

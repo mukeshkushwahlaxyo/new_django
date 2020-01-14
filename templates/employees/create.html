@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card mt-5 ml-3 mr-3">
+                <div id="logreg-forms" class="container">
+                    <form class="form-signin" method="post" action="{% url 'save_emplyee' %}">
+                        {% csrf_token %} 
+                        <div class="row ml-2 mt-5">
+                        {% for field in form %} 	           
+                            <div class="col-sm-4 mb-3">
+                                {{field.label_tag}}
+                                <input id="inputEmail" name="{{field.name}}" class="form-control" placeholder="" autofocus="">
+                                <p style="" class="text-denger">{{field.errors}}</p>
+                            </div>
+                            
+                        {% endfor %}            
+                    </div>
+                        <!-- <p>Don't have an account!</p>  -->
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <input value="Sign up" class="btn btn-primary" type="submit" id="btn-signup">
+                            </div>
+                        </div>
+                        </form>
+                        <br>           
+                </div>   
+            </div>
+        </div>
+    </div>    
+</div>
+<style type="text/css">
+    .errorlist li {
+        color: red; 
+        font-size:10px;
+        list-style-type: none;
+    }
+</style>
+{% endblock content %}    
