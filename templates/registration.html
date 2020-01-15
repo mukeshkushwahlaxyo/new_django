@@ -6,8 +6,8 @@
         <div class="col-sm-12 col-md-12">
             <div class="card mt-5 ml-3 mr-3">
                 <div id="logreg-forms" class="container" style="background-color: #f2f4f6;">
-                    <div class="form-signin" method="post" action="{% url 'save_emplyee' %}">
-                        <form>
+                    <div class="form-signin" >
+                        <form method="post" action="{% url 'save_employee' %}">
                             {% csrf_token %} 
                             <div class="row ml-2 mt-5 ">  
                                 <div class="col-md-3"></div> 
@@ -16,28 +16,34 @@
                                         <div class="col-md-6">
                                             <label>{{form.first_name.label}}</label>
                                             <input id="inputEmail" name="{{form.first_name.name}}" class="form-control" placeholder="" autofocus="">
-                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                            <p style="" class="text-denger">{{form.first_name.errors}}</p>
                                         </div>
                                         <div class="col-md-6">
                                             <label>{{form.last_name.label}}</label>
                                             <input id="inputEmail" name="{{form.last_name.name}}" class="form-control" placeholder="" autofocus="">
-                                            <p style="" class="text-denger">{{form.username.errors}}</p>
+                                            <p style="" class="text-denger">{{form.last_name.errors}}</p>
+                                        </div> 
+
+                                        <div class="col-md-12">
+                                            <label>{{form.email.label}}</label>
+                                            <input id="inputEmail" name="{{form.email.name}}" class="form-control" placeholder="" autofocus="">
+                                            <p style="" class="text-denger">{{form.last_name.errors}}</p>
                                         </div> 
 
                                         <div class="col-md-12">
                                             <label>{{form.username.label}}</label>
                                             <input id="inputEmail" name="{{form.username.name}}" class="form-control" placeholder="" autofocus="">
-                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                            <p style="" class="text-denger">{{form.username.errors}}</p>
                                         </div>
                                         <div class="col-md-12">
                                             <label>{{form.password1.label}}</label>
                                             <input id="inputEmail" name="{{form.password1.name}}" class="form-control" placeholder="" autofocus="">
-                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                            <p style="" class="text-denger">{{form.password1.errors}}</p>
                                         </div> 
                                         <div class="col-md-12">
                                             <label>{{form.password2.label}}</label>
                                             <input id="inputEmail" name="{{form.password2.name}}" class="form-control" placeholder="" autofocus="">
-                                            <p style="" class="text-denger">{{field.errors}}</p>
+                                            <p style="" class="text-denger">{{form.password2.errors}}</p>
                                         </div> 
                                   
                                         <div class="col-md-12 text-center mb-4">

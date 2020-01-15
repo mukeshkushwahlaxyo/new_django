@@ -7,9 +7,9 @@
         <div class="col-sm-12 col-md-12">
             <div class="card mt-5 ml-3 mr-3 overflow-hidden">							
             	<div class="mt-5 mb-5 ml-3 mr-3">
-								<div class="mb-3">
-									<a href="{% url 'EmployeeCreate' %}" style="color:white;" class="btn btn-primary">Create</a>
-							</div>
+					<div class="mb-3">
+						<a href="{% url 'EmployeeCreate' %}" style="color:white;" class="btn btn-primary">Create</a>
+				</div>
 	            	<table class="table table-stripped table-bordered dataTable no-footer">
 	            		<tr>
 	            			<th>SN.</th>
@@ -20,15 +20,20 @@
 	            			<th>Leaves</th>
 	            			<th>Actions</th>
 	            		</tr>
-	            		<tr>
-	            			<td>SN.</td>
-	            			<td>Employee Name</td>
-	            			<td>Employee Code</td>
-	            			<td>Grade Code</td>
-	            			<td>Designation</td>
-	            			<td>Leaves</td>
-	            			<td>Actions</td>
-	            		</tr>
+	            		{% for datas in data %}	            		
+		            		<tr>
+		            			<td>{{ forloop.counter }}</td>
+		            			<td>{{datas.first_name}} {{datas.last_name}}</td>
+		            			<td></td>
+		            			<td></td>
+		            			<td></td>
+		            			<td></td>
+		            			<td>
+		            				<a><i class="fas fa-edit"></i></a>
+		            				<a><i class="fa fa-trash" aria-hidden="true"></i></a>
+		            			</td>
+		            		</tr>
+		            	{% endfor %}	
 
 	            	</table>
 	            </div>                
