@@ -76,3 +76,4 @@ class Documents(ModelForm):
             'note':'Note',
             'files':'File',
         }        
+

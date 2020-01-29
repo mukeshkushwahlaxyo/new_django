@@ -2,15 +2,18 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 from django.contrib.auth import authenticate,login,logout
+
 from employee.models import User
 from hrd.models import Employee,TypesMast,StatusMast,GradesMast,DesigMast,ComapnyMast,AcademicsMast
 from employee.forms import SignUpForm,EmployeeEditForm
 from hrd.forms import PersonalInfo,OfficeInfo,AcademicsInfo,BankInfo,Documents
+
 from rolepermissions.roles import assign_role
 from rolepermissions.checkers import has_role
 from rolepermissions.roles import get_user_roles
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+
 
 class Employees:
 
@@ -26,11 +29,12 @@ class Employees:
 		form = SignUpForm()
 		return render(request, "registration.html",{'form':form})
 
-	# @login_required
+
 	def saveEmployee(request):	
 		form = SignUpForm(request.POST)
 		if request.POST:
 			if form.is_valid():
+
 				user1 = form.save()
 				assign_role(user1, 'is_employee')
 				emp = Employee(user_id=user1.id)
@@ -102,3 +106,4 @@ class Employees:
 			form = Documents()
 			main = render(request, "employees/forms/document.html",{'form':form})
 		return main
+

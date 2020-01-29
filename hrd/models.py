@@ -22,6 +22,7 @@ class Employee(models.Model):
     perm_addr = models.TextField(null=True)
     blood_grp = models.CharField(max_length=5,null=True)
     contact = models.CharField(max_length=15,null=True)
+
     alt_contact = models.CharField(max_length=15,null=True)
     email = models.CharField(max_length=30,null=True)
     driv_lic = models.CharField(max_length=255,null=True)
@@ -94,6 +95,3 @@ class Document(models.Model):
     document_status = models.CharField(max_length=55,null=True)
     note = models.TextField(null=True)
     files = models.CharField(max_length=255,null=True)
-
-    
-                
