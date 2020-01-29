@@ -4,7 +4,9 @@ from . import views
 urlpatterns = [
     path('employees', views.Employees.index, name='hrdEmployee'),
     path('employees_create', views.Employees.EmployeeCreate, name='EmployeeCreate'),
-    # path('loginCheck', views.HomePage.checkLogin, name='checkLogin'),
-    # path('employee_create', views.HomePage.Singhup, name='singhupEmployee'),
-    # path('save_emplyee', views.HomePage.Store, name='save_emplyee'),
+    path('save_employee', views.Employees.saveEmployee, name='save_employee'),
+    path('delete_employee/<int:id>', views.Employees.deleteEmployee, name='delete_employee'),
+    path('edit_employee/<int:id>', views.Employees.editEmployee, name='edit_employee'),
+    path('showTabs/<slug:page>/<int:id>', views.Employees.showTabs, name='showTabs'),    
 ]
+# /<str:form>/<int:id>

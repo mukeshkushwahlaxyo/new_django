@@ -1,0 +1,34 @@
+<form method="post" action="{% url 'save_employee' %}">
+  {% csrf_token %} 
+  <div class="row ml-2 mt-5 ">  
+      <div class="col-md-1"></div> 
+      <div class="col-md-12">
+          <div class="row formBox">                         
+              <div class="col-md-6">
+                  <label>{{form.document_title.label}}</label>
+                  <input id="inputEmail" name="{{form.document_title.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.document_title.errors}}</p>
+              </div>
+              <div class="col-md-6">
+                  <label>{{form.document_status.label}}</label>
+                  <input id="inputEmail" name="{{form.document_status.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.document_status.errors}}</p>
+              </div> 
+
+              <div class="col-md-12">
+                  <label>{{form.note.label}}</label>
+                  <textarea id="inputEmail" name="{{form.note.name}}" class="form-control" placeholder="" autofocus=""></textarea>
+                  <p style="" class="text-denger">{{form.note.errors}}</p>
+              </div>           
+              <div class="col-md-6">
+                  <label>{{form.files.label}}</label>
+                  <input type="file" id="inputEmail" name="{{form.files.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.files.errors}}</p>
+              </div>      
+              <div class="col-md-12 text-center mb-4">
+                  <input type="submit" value="Submit" class="btn btn-primary">
+              </div>
+          </div>
+      </div> 
+  </div>
+</form>

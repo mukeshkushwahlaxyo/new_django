@@ -20,20 +20,24 @@
 	            			<th>Leaves</th>
 	            			<th>Actions</th>
 	            		</tr>
+	            		{% for users in user %}
 	            		<tr>
-	            			<td>SN.</td>
-	            			<td>Employee Name</td>
-	            			<td>Employee Code</td>
-	            			<td>Grade Code</td>
-	            			<td>Designation</td>
-	            			<td>Leaves</td>
-	            			<td>Actions</td>
+	            			<td>{{forloop.counter}}</td>
+	            			<td>{{users.first_name}} {{users.last_name}}</td>
+	            			<td></td>
+	            			<td></td>
+	            			<td></td>
+	            			<td></td>
+	            			<td>
+	            				<a href="delete_employee/{{users.id}}" class="fa fa-trash mr-1"></a>
+	            				<a href="edit_employee/{{users.id}}" class="fas fa-edit"></a>
+	            				<a href="showTabs/main/{{users.id}}"  class="fa fa-eye"></a>
+	            			</td>
 	            		</tr>
-
-	            	</table>
+	            		{% endfor %}
+	            	</table>	
 	            </div>                
-						</div
-						>
+						</div>
         </div>
     </div>    
 </div>

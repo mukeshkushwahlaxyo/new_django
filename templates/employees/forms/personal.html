@@ -1,0 +1,97 @@
+<form method="post" id="personalinfo">
+  {% csrf_token %} 
+  <div class="row ml-2 mt-5 ">  
+      <div class="col-md-1"></div> 
+      <div class="col-md-12">
+          <div class="row formBox">                         
+              <div class="col-md-4">
+                  <label>{{form.emp_name.label}}</label>
+                  <input id="inputEmail" name="{{form.emp_name.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.emp_name.errors}}</p>
+              </div>
+              <div class="col-md-4">
+                  <label>{{form.emp_dob.label}}</label>
+                  <input id="datepicker" name="{{form.emp_dob.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.emp_dob.errors}}</p>
+              </div> 
+
+              <div class="col-md-4">
+                  <label>{{form.email.label}}</label>
+                  <input id="inputEmail" name="{{form.email.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.email.errors}}</p>
+              </div> 
+
+              <div class="col-md-6">
+                  <label>{{form.blood_grp.label}}</label>
+                  <input id="inputEmail" name="{{form.blood_grp.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.blood_grp.errors}}</p>
+              </div> 
+              <div class="col-md-6">
+                  <label>{{form.emp_gender.label}}</label>
+                  <select name="{{form.emp_gender.name}" class="form-control">
+                    {% for value, text in form.emp_gender.field.choices %}
+                      <option value="{{ value }}"> {{text}}</option>                     
+                   {% endfor %}      
+                 </select>                
+                  <p style="" class="text-denger">{{form.emp_gender.errors}}</p>
+              </div>              
+              <div class="col-md-6">
+                  <label>{{form.contact.label}}</label>
+                  <input id="inputEmail" name="{{form.contact.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.contact.errors}}</p>
+              </div>               
+              <div class="col-md-6">
+                  <label>{{form.alt_contact.label}}</label>
+                  <input id="inputEmail" name="{{form.alt_contact.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.alt_contact.errors}}</p>
+              </div>
+              <div class="col-md-12">
+                  <label>{{form.curr_addr.label}}</label>
+                  <textarea id="inputEmail" name="{{form.curr_addr.name}}" class="form-control" placeholder="" autofocus=""></textarea>
+                  <p style="" class="text-denger">{{form.curr_addr.errors}}</p>
+              </div>  
+              <div class="col-md-12">
+                  <label>{{form.perm_addr.label}}</label>
+                  <textarea id="inputEmail" name="{{form.perm_addr.name}}" class="form-control" placeholder="" autofocus=""></textarea>
+                  <p style="" class="text-denger">{{form.perm_addr.errors}}</p>
+              </div>       
+              <div class="col-md-12 text-center mb-4">
+                  <input type="submit" value="Submit" class="btn btn-primary">
+              </div>
+          </div>
+      </div> 
+  </div>
+</form>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+  $(document).ready(function(){
+     $('#datepicker').datepicker();
+  });
+ 
+  $(document).on('submit','#personalinfo',function(event){
+    event.preventDefault()
+
+    var form = $('#details_tab_form').serialize();
+    var tender_id = $('#tender_id').val();
+
+    var id = $('#userId').val();
+    $.ajaxSetup({ 
+     beforeSend: function(xhr, settings) {
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+               }
+           } 
+      });
+    $.ajax({
+        url: "/hrd/showTabs/personal/"+id,
+        type: 'POST',
+        data: $('#personalinfo').serialize(),
+        success: function (data) {
+              $('#showForms').html(data)
+            }
+         });
+    }); 
+                      
+</script>

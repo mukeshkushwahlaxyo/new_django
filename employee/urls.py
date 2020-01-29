@@ -6,5 +6,6 @@ urlpatterns = [
     path('', views.HomePage.index, name='index'),
     path('loginCheck', views.HomePage.checkLogin, name='checkLogin'),
     path('employee_create', views.HomePage.Singhup, name='singhupEmployee'),
-    path('save_emplyee', views.HomePage.Store, name='save_emplyee'),
+    path('logout_view', views.HomePage.logout_view, name='logout_view'),
+    # path('save_emplyee', views.HomePage.Store, name='save_emplyee'),
 ]

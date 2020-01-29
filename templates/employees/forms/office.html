@@ -1,0 +1,60 @@
+<form method="post" action="{% url 'save_employee' %}">
+  {% csrf_token %} 
+  <div class="row ml-2 mt-5 ">  
+      <div class="col-md-1"></div> 
+      <div class="col-md-12">
+          <div class="row formBox">                         
+              <div class="col-md-4">
+                  <label>{{form.comp_id.label}}</label>
+                  <input id="inputEmail" name="{{form.comp_id.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.comp_id.errors}}</p>
+              </div>
+              <div class="col-md-4">
+                  <label>{{form.dept_id.label}}</label>
+                  <input id="inputEmail" name="{{form.dept_id.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.dept_id.errors}}</p>
+              </div> 
+
+              <div class="col-md-4">
+                  <label>{{form.emp_type.label}}</label>
+                  <input id="inputEmail" name="{{form.emp_type.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.emp_type.errors}}</p>
+              </div> 
+
+              <div class="col-md-6">
+                  <label>{{form.emp_status.label}}</label>
+                  <input id="inputEmail" name="{{form.emp_status.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.emp_status.errors}}</p>
+              </div> 
+              <div class="col-md-6">
+                  <label>{{form.leave_dt.label}}</label>
+                  <input type="" name="{{form.leave_dt.name}}" class="form-control">
+                  <p style="" class="text-denger">{{form.leave_dt.errors}}</p>
+              </div>   
+               <div class="col-md-6">
+                  <label>{{form.join_dt.label}}</label>
+                  <input type="" name="{{form.join_dt.name}}" class="form-control">
+                  <p style="" class="text-denger">{{form.join_dt.errors}}</p>
+              </div>              
+              <div class="col-md-6">
+                  <label>{{form.emp_code.label}}</label>
+                  <input id="inputEmail" name="{{form.emp_code.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.emp_code.errors}}</p>
+              </div>               
+              <div class="col-md-6">
+                  <label>{{form.desg_id.label}}</label>
+                  <input id="inputEmail" name="{{form.desg_id.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.desg_id.errors}}</p>
+              </div>
+              <div class="col-md-6">
+                  <label>{{form.reports_to.label}}</label>
+                  <input id="inputEmail" name="{{form.reports_to.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.reports_to.errors}}</p>
+              </div>       
+              <div class="col-md-12 text-center mb-4">
+                  <input type="submit" value="Submit" class="btn btn-primary">
+              </div>
+          </div>
+      </div> 
+  </div>
+</form>

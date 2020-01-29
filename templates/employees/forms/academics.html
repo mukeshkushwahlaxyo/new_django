@@ -1,0 +1,45 @@
+<form method="post" action="{% url 'save_employee' %}">
+  {% csrf_token %} 
+  <div class="row ml-2 mt-5 ">  
+      <div class="col-md-1"></div> 
+      <div class="col-md-12">
+          <div class="row formBox">                         
+              <div class="col-md-4">
+                  <label>{{form.doman_of_study.label}}</label>
+                  <input id="inputEmail" name="{{form.doman_of_study.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.doman_of_study.errors}}</p>
+              </div>
+              <div class="col-md-4">
+                  <label>{{form.name_of_board.label}}</label>
+                  <input id="inputEmail" name="{{form.name_of_board.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.name_of_board.errors}}</p>
+              </div> 
+
+              <div class="col-md-4">
+                  <label>{{form.complete_in.label}}</label>
+                  <input id="inputEmail" name="{{form.complete_in.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.complete_in.errors}}</p>
+              </div> 
+
+              <div class="col-md-6">
+                  <label>{{form.gared.label}}</label>
+                  <input id="inputEmail" name="{{form.gared.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.gared.errors}}</p>
+              </div>                                     
+              <div class="col-md-12">
+                  <label>{{form.note.label}}</label>
+                  <textarea id="inputEmail" name="{{form.note.name}}" class="form-control" placeholder="" autofocus=""></textarea>
+                  <p style="" class="text-denger">{{form.note.errors}}</p>
+              </div>       
+               <div class="col-md-6">
+                  <label>{{form.document.label}}</label>
+                  <input id="inputEmail" type="file" name="{{form.document.name}}" class="form-control" placeholder="" autofocus="">
+                  <p style="" class="text-denger">{{form.document.errors}}</p>
+              </div>              
+              <div class="col-md-12 text-center mb-4">
+                  <input type="submit" value="Submit" class="btn btn-primary">
+              </div>
+          </div>
+      </div> 
+  </div>
+</form>

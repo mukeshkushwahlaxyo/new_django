@@ -31,17 +31,9 @@ class HomePage:
 
 			user = authenticate(username=username, password=password)
 			login(request, user)
-			if user.is_staff:
+			if request.user.is_authenticated:
 				return redirect('/employee')
-
-			# if user.is_valid:
-			# 	return HttpResponse(form)
-			# 		# 
-			# 		# 	user = form.save()
-			# else:
-			# 	return HttpResponse('error')	
-
-
+				
 	def Singhup(request):
 		form = SignUpForm		
 		return render(request, "registration.html",{'form':form})
