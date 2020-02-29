@@ -1,0 +1,37 @@
+	<table class="table" id="myTable1">
+		<thead>
+			<tr>
+					<th scope="col">Sno.</th>
+			    <th scope="col">Document title</th>
+			    <th scope="col">Document Status</th>
+			    <th scope="col">Note</th>
+			    <th scope="col">File</th>			    
+			    <th scope="col">Action</th>			    
+			</tr>
+		</thead>
+		<tbody>
+			{% for Data in data %}
+			<tr>
+					<td>{{forloop.counter}}</td>
+					<td>{{Data.document_title}}</td>
+					<td>{{Data.document_status}}</td>
+					<td>{{Data.note}}</td>
+					<td></td>
+					<td>
+						<a  onclick="Delete('{{Data.id}}','Document','academicsTable','/hrd/delete_details/{{id}}','documentRefresh.html')" class="fa fa-trash mr-1"></a>
+	          <a href="showTabs/main/{{users.id}}"  class="fa fa-eye"></a>
+					</td>
+				</tr>
+		</tbody>		
+			{% endfor %}
+		</table>
+		 <!-- DataTable Css -->
+		 {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'DataTables/datatables.min.css' %}"/> 
+		<!-- Datatable JS -->
+<script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+<script >
+	$(document).ready( function () {
+    $('#myTable1').DataTable();
+} );
+</script>

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card mt-5 ml-3 mr-3 overflow-hidden">							
+            	<div class="mt-5 mb-5 ml-3 mr-3">
+					<div class="mb-3">
+						<a href="{% url 'ApplyLeave' %}" style="color:white;" class="btn btn-primary">Create</a>
+				</div>
+	            	<table class="table table-stripped table-bordered dataTable no-footer">
+	            		<tr>
+	            			<th>SN.</th>
+	            			<th>Leave Type</th>
+	            			<th>Leave Period</th>
+	            			<th>Leave Duration</th>
+	            			<th>Team Lead</th>
+	            			<th>Hr Approval</th>
+	            			<th>Admin Approval</th>
+	            			<th>Action</th>
+	            		</tr>
+	            		{% for Data in data %}
+		            		<tr>	
+		            			<td>{{forloop.counter}}</td>
+		            			<td>{{Data.leave_type_id}}</td>
+		            			<td>{{ Data.date_from|date:"M d, Y" }} To {{ Data.date_to|date:"M d, Y" }}</td>
+		            			<td>{{Data.count}} Days</td>
+		            			<td>{{Data.teamlead_approval}}</td>
+		            			<td>{{Data.subadmin_approval}}z</td>
+		            			<td>{{Data.admin_approval}}</td>
+		            			<td>
+		            				<a href="{% url 'DeleteLeave' Data.id %}" class="fa fa-trash mr-1"></a> 
+	            					<a href="{% url 'EditApplyLeave' Data.id %}" class="fas fa-edit"></a>
+	            					<a href=""  class="fa fa-eye" ></a>
+		            			</td>
+		            		</tr>
+		            	{% endfor %}
+	            	</table>	
+	            </div>  
+        </div>
+    </div>    
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Leave Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     	<form id="leave_allot_form" >
+      <div class="modal-body">
+      	<div class="row  mb-3">
+      		<div class="col-sm-6">
+      			<label>Start Date</label>
+      			<input type="" class="form-control datepicker" readonly="" name="start_date">
+      		</div>
+      		<div class="col-sm-6">
+      			<label>End Date</label>
+      			<input readonly="" type="" class="form-control datepicker" name="end_date">
+      		</div>
+      	</div>
+      	<div class="row" id="leavetype">
+	     </div>	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveLeave">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+	 $(document).ready(function(){
+     $('.datepicker').datepicker({dateFormat: 'yy-mm-dd' });
+  });
+	 
+</script>
+
+{% endblock content %}   

@@ -18,16 +18,18 @@
 	            			<th>Grade Code</th>
 	            			<th>Designation</th>
 	            			<th>Leaves</th>
+	            			<th>Status</th>
 	            			<th>Actions</th>
 	            		</tr>
 	            		{% for users in user %}
-	            		<tr>
+	            		<tr>	
 	            			<td>{{forloop.counter}}</td>
-	            			<td>{{users.first_name}} {{users.last_name}}</td>
-	            			<td></td>
-	            			<td></td>
-	            			<td></td>
-	            			<td></td>
+	            			<td>{{users.user_id}}</td>
+	            			<td>{{users.emp_code}}</td>
+	            			<td>{{users.grade_id.name}}</td>
+	            			<td>{{users.desg_id.name}}</td>
+	            			<td>{% if users.leave_allotted %}<span class="changeBtn"><a class="btn btn-danger btn-sm unallocated" onclick="allot({{users.id}},'unallocated')" >Unallocated</a></span>{% else %} <span class="changeBtn"> <a class="btn-sm btn btn-success allot"  onclick="allot({{users.id}},'allot')" >Allot</a></span>{% endif %}</td>
+	            			<td>{% if users.user_id.is_active %}<a class="btn btn-danger btn-sm"  href="/hrd/change_status/unactive/{{users.id}}">Unactive</a>{% else %} <a href="/hrd/change_status/active/{{users.id}}" class="btn-sm btn btn-primary">Active</a>{% endif %}</td>
 	            			<td>
 	            				<a href="delete_employee/{{users.id}}" class="fa fa-trash mr-1"></a>
 	            				<a href="edit_employee/{{users.id}}" class="fas fa-edit"></a>
@@ -40,5 +42,104 @@
         </div>
     </div>    
 </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Leave Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     	<form id="leave_allot_form" >
+      <div class="modal-body">
+      	<div class="row  mb-3">
+      		<div class="col-sm-6">
+      			<label>Start Date</label>
+      			<input type="" class="form-control datepicker" readonly="" name="start_date">
+      		</div>
+      		<div class="col-sm-6">
+      			<label>End Date</label>
+      			<input readonly="" type="" class="form-control datepicker" name="end_date">
+      		</div>
+      	</div>
+      	<div class="row" id="leavetype">
+	     </div>	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveLeave">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script>
+	 $(document).ready(function(){
+     $('.datepicker').datepicker({dateFormat: 'yy-mm-dd' });
+  });
+
+	var token = '{{csrf_token}}';
+	function allot(id,type){
+		if(type == 'unallocated'){
+			$.ajax({
+				headers: { "X-CSRFToken": token },
+				type:'POST',
+				url:'/hrd/LeaveAllot/',
+				data:{'id':id,'type':type},
+				success:function(data,textStatus, xhr){
+					if(xhr.status == 200){
+            $.notify("Data Save", "Leave Deallocated");
+             location.reload();
+          }
+				}
+			})
+		}
+		else{
+			$.ajax({
+				headers: { "X-CSRFToken": token },
+				type:'POST',
+				url:'/hrd/getLeaves/',
+				data:{'id':id},
+				success:function(data){
+					let data1 = ''
+					let getData = JSON.parse(data.data)
+					let end_date = new Date().getFullYear()+'-12-31'
+					var month = new Date().getMonth() + 1
+					var day = new Date().getDate()
+					var year = new Date().getFullYear()
+					$("input[name='start_date']").val(year+'-'+month+'-'+day)
+					$("input[name='end_date']").val(end_date)
+
+					
+					$.each(getData, function(i, item) {
+						console.log(item)
+						data1 += "<div class='col form-group'><label class='form-check-label' for='materialInline1'>"+item.fields.name+"</label><div class='toggle lg row col-12'><div class='form-check form-check-inline mr-0'><label><input type='checkbox' value='"+getData[i].pk+"' name='leave_mast_id_id[]' class='form-check-input materialInline1' id=''><span class='button-indecator'></span></label> </div></div></div><input type='hidden' value='"+id+"' name=emp_id> <input type='hidden' value='"+item.fields.name+"'><input type='hidden' name='type' value='"+type+"'>"
+						});
+					$("#leavetype").html(data1)
+					$('#myModal').modal('show')
+				}
+			})
+		}
+};
+
+$(document).on('click','#saveLeave',function(){
+		$.ajax({
+			headers: { "X-CSRFToken": token },
+			type:'POST',
+			url:'/hrd/LeaveAllot/', 
+			data:$('#leave_allot_form').serialize(),
+			success:function(data, textStatus, xhr){
+				if(xhr.status == 200){
+            $.notify("Data Save", "Leave Alloted");
+             location.reload();
+          }
+			}
+		})
+
+})
+</script>
 
 {% endblock content %}   

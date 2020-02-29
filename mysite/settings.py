@@ -38,8 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'employee',
+    'masters',
     'hrd',
     'rolepermissions',
+    'leavemanagement',
 ]
 
 MIDDLEWARE = [
@@ -134,10 +136,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+AUTH_USER_MODEL = 'employee.User'
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, "static"),
 #     '/var/www/static/',
 # ]
 
-AUTH_USER_MODEL = 'employee.User'
 LOGIN_URL = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+EMAIL_BACKEND ='django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST = 'imap.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = 'm.kushwah333333@gmail.com'
+EMAIL_HOST_PASSWORD = 'mukesh@@11'

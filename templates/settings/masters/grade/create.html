@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">	
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card mt-5 ml-3 mr-3 overflow-hidden">							
+       	<div class="mt-3 mb-5 ml-3 mr-3">
+       		<div class="row">
+						<div class="col-sm-12  mb-3 ">
+							<a href="{% url 'emp_grade' %}" style="color:white;" class="btn btn-primary float-right">Back</a>
+						</div>
+					</div>
+					<form method="post" action="{% url 'emp_grade.create' %}">
+						{% csrf_token %} 
+						<div class="row">
+							<div class="col-sm-4"></div>
+							<div class="col-sm-4">
+								<div class="row">
+									<div class="col-sm-12"> 
+										<label>{{form.name.label}}</label>
+										<input type="text" class="form-control" name="{{form.name.name}}">
+										<p style="" class="text-denger">{{form.name.errors}}</p>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12"> 
+										<label>{{form.description.label}}</label>
+										<textarea type="text" class="form-control" name="{{form.name.description}}"></textarea>
+										<p style="" class="text-denger">{{form.description.errors}}</p>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4"></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 text-center mt-3">
+								<input type="submit" value="Submit" class="btn btn-primary" name="submit">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+<style type="text/css">
+    .errorlist li {
+        color: red; 
+        font-size:10px;
+        list-style-type: none;
+    }
+</style>
+{% endblock %}

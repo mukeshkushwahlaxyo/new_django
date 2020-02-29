@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card mt-5 ml-3 mr-3">
+            	<div class="col-md-12 ">
+            	 	<a href="{% url 'ShowLeaves' %}" style="color:white;" class="btn btn-primary float-right mt-3">Back</a>
+            	 </div>
+                <div id="logreg-forms" class="container">
+                    <form method="post" id='academics' action="{% url 'EditApplyLeave' id %}" enctype="multipart/form-data">
+										  {% csrf_token %} 
+										  <div class="row ml-2 mt-2 ">  
+										      <div class="col-md-1"></div> 
+										      <div class="col-md-12">
+										          <div class="row formBox">                         
+										              <div class="col-md-6">
+										                  <label>{{form.leave_type_id.label}}</label>
+										                  <select class="form-control" name="{{form.leave_type_id.name}}">
+										                  	<option>--------</option>
+										                  	{% for leaves in leaves %}
+										                  		<option {% if leaves.id == form.leave_type_id.value %} selected="true" {% endif %} {% if leaves.id not in leaves_id %} disabled ="true" {% endif %} value="{{leaves.id}}">{{leaves.name}}</option>
+										                  	{% endfor %}
+										                	</select>
+										                  <p style="" class="text-denger">{{form.leave_type_id.errors}}</p>
+										              </div>
+										              <div class="col-md-6">
+										                  <label>{{form.reports_to.label}}</label>
+										                  <select class="form-control" name="{{form.reports_to.name}}">
+										                  	<option value="">--------</option>
+											                    {% for users1 in users %}
+																						{% if user.id != users1.id %}											                    
+											                      	<option {% if users1.id == form.reports_to.value %} selected="true" {% endif %}  value="{{users1.id}}">{{users1.first_name}} {{users1.last_name}}</option>
+											                      {% endif %}	
+											                    {% endfor %}
+										                	</select>
+										                  <p style="" class="text-denger">{{form.reports_to.errors}}</p>
+										              </div> 
+
+										              <div class="col-md-4">
+										                  <label>{{form.date_from.label}}</label>
+										                  <input id="date_from" value="{{form.date_from.value|date:'Y-m-d' }}" name="{{form.date_from.name}}" class="form-control datepicker" placeholder="" autofocus="">
+										                  <p style="" class="text-denger">{{form.date_from.errors}}</p>
+										              </div> 
+
+										              <div class="col-md-4">
+										                  <label>{{form.date_to.label}}</label>
+										                  <input id="date_to" value="{{form.date_to.value|date:'Y-m-d' }}" name="{{form.date_to.name}}" class="form-control datepicker" placeholder="" autofocus="">
+										                  <p style="" class="text-denger">{{form.date_to.errors}}</p>
+										              </div>                                     
+										              <div class="col-md-4">
+										                  <label>{{form.count.label}}</label>
+										                  <input readonly="true" id="count" {{form.count.value}} name="{{form.count.name}}" class="form-control" placeholder="" autofocus="">
+										                  <p style="" class="text-denger">{{form.count.errors}}</p>
+										              </div>       
+										               <div class="col-md-6">
+										                  <label>{{form.reason.label}}</label>
+										                  <textarea id="inputEmail" name="{{form.reason.name}}" class="form-control" placeholder="" autofocus="">{{form.reason.value}}</textarea>
+										                  <p style="" class="text-denger">{{form.reason.errors}}</p>
+										              </div>
+										              <div class="col-md-6">
+										              	<label>{{form.contact_no.label}}</label>
+										              	<input type="" name="{{form.contact_no.name}}" value="{{form.contact_no.value}}" class="form-control">
+										              </div>
+										              <div class="col-md-12">
+										              	<label>{{form.applicant_remark.label}}</label>
+										              	<textarea type="" class="form-control" name="{{form.applicant_remark.name}}">{{form.applicant_remark.value}}</textarea>
+										              </div>
+										              <input type="hidden" name="{{form.user.name}}" value="{{user.id}}">
+										              <input type="hidden" name="{{form.admin_approval.name}}" value="Pending">
+										              <input type="hidden" name="{{form.subadmin_approval.name}}" value="Pending">
+										              <input type="hidden" name="{{form.teamlead_approval.name}}" value="Pending">
+										              <div class="col-md-12 text-center mb-4 mt-3">
+										                  <input type="submit" value="Submit" class="btn btn-primary">
+										              </div>
+										          </div>
+										      </div> 
+										  </div>
+										</form>  
+                </div>   
+            </div>
+        </div>
+    </div>    
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+     $('.datepicker').datepicker({dateFormat: 'yy-mm-dd' });
+  });
+
+  $(document).on('click mouseleave','#date_to',function(){
+  		var date_start = new Date($('#date_from').val()); 
+			var date_to = new Date($('#date_to').val()); 
+			var Difference_In_Time = date_to.getTime() - date_start.getTime(); 
+  		var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24); 
+  	$('#count').val(Difference_In_Days)
+  });
+</script>
+<style type="text/css">
+    .errorlist li {
+        color: red; 
+        font-size:10px;
+        list-style-type: none;
+    }
+</style>
+{% endblock content %}    

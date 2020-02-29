@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">        	
+		    	{% if messages %}
+			    	<div class="alert alert-success text-center">
+			    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+						    {% for message in messages %}
+						    <span class="" {% if message.tags %} class=""{% endif %}>{{ message }}</span>
+						    {% endfor %}
+
+			    	</div>
+					{% endif %}
+            <div class="card mt-5 ml-3 mr-3 overflow-hidden">							
+            	<div class="mt-5 mb-5 ml-3 mr-3">
+					<div class="mb-3">
+						<a href="{% url 'leavetype.create' %}" style="color:white;" class="btn btn-primary">Create</a>
+				</div>
+	            	<table class="table table-stripped table-bordered dataTable no-footer">
+	            		<tr>
+	            			<th>SN.</th>
+	            			<th>Leave Name</th>
+	            			<th>Leave Per Year</th>
+	            			<th>Action</th>	            			
+	            		</tr>
+	            		{% for Data in data %}
+	            		<tr>
+	            			<td>{{forloop.counter}}</td>
+	            			<td>{{Data.name}}</td>
+	            			<td>{{Data.leave_per_year|default_if_none:''}}</td>
+	            			<td>
+	            				<a href="{% url 'leavetype.edit' Data.id %}" class="fas fa-edit"></a>
+	            				<a href="{% url 'leavetype.delete' Data.id %}" class="fa fa-trash ml-1 text-danger"></a>
+	            				<a href="#" onclick="showInfo({{Data.id}})" class="fa fa-eye ml-1 text-success"></a>
+	            			</td>
+	            		</tr>
+	            		{% endfor %}	            		
+	            	</table>	
+	            </div>  
+        </div>
+    </div>    
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Leave Detail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+	      	<div class="col-md-6 mb-2"><b>Name:</b><span id="name"></span></div>
+	      	<div class="col-md-6 mb-2"><b>Total:</b><span id="total"></span></div>
+	      	<div class="col-md-6 mb-2"><b>Leavr Per Year:</b><span id="per_year"></span></b></div>
+	      	<div class="col-md-6 mb-2"><b>Generate Dys:</b><span id="Gday"></span></div>
+	      	<div class="col-md-6 mb-2"><b>Max apply once:</b><span id="max_apply"></span></div>
+	      	<div class="col-md-6 mb-2"><b>Min apply once:</b><span id="min_apply"></span></div>
+	      	<div class="col-md-6"><b>Max Days once:</b><span id="day_once"></span></div>
+	      	<div class="col-md-6 mb-2"><b>Max Apply month:</b><span id="apply_month"></span></div>
+	      	<div class="col-md-6"><b>Max Apply year:</b><span id="apply_year"></span></div>
+	     </div>	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	function getCookie(name)
+		{
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie != '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = jQuery.trim(cookies[i]);
+		            // Does this cookie string begin with the name we want?
+
+		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+	function showInfo(id){
+		$.ajaxSetup({ 
+     beforeSend: function(xhr, settings) {
+         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+             // Only send the token to relative URLs i.e. locally.
+             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+               }
+           } 
+      });
+		$.ajax({
+			type:'POST',
+			url:'/leave_manage/showInfo/',
+			data:{'id':id},
+			success:function(data){
+				let getData = JSON.parse(data.data)
+				$('#name').text(getData[0].fields.name)
+				$('#total').text(getData[0].fields.total)
+				$('#per_year').text(getData[0].fields.leave_per_year)
+				$('#Gday').text(getData[0].fields.generate_days)
+				$('#max_apply').text(getData[0].fields.max_apply_once)
+				$('#min_apply').text(getData[0].fields.min_apply_once)
+				$('#day_once').text(getData[0].fields.max_days_month)
+				$('#apply_month').text(getData[0].fields.max_apply_month)
+				$('#apply_year').text(getData[0].fields.max_apply_year)
+				$('#myModal').modal('show')		
+			}
+		})
+		
+	};
+</script>
+{% endblock content %}   

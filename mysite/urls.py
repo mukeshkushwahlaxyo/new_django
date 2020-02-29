@@ -21,7 +21,10 @@ urlpatterns = [
     # path('admin/', admin.site.urls),
     path('employee/', include('employee.urls')),
     path('hrd/', include('hrd.urls')),
+    path('masters/', include('masters.urls')),
+    path('leave_manage/', include('leavemanagement.urls')),
     path('', views.HomePage.login,name='login'),
     path('logout', views.HomePage.logout_view,name='logout'),
     path('dashboard', views.HomePage.index,name='dashboard'),
 ]
+

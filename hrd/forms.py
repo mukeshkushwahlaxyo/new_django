@@ -25,9 +25,10 @@ class PersonalInfo(ModelForm):
          }
 
 class OfficeInfo(ModelForm):
+    
     class Meta(ModelForm):
         model = Employee
-        fields = ('comp_id','dept_id','emp_type','emp_status','join_dt','leave_dt','emp_code','desg_id','reports_to')
+        fields = ('comp_id','dept_id','emp_type','emp_status','join_dt','leave_dt','emp_code','desg_id','reports_to','grade_id')
         labels = {
              'comp_id':'Company Name',
              'dept_id':'Department',
@@ -38,11 +39,15 @@ class OfficeInfo(ModelForm):
              'emp_code':'Employee Code',
              'desg_id':'Designation',
              'reports_to':'Reports To',
+             'grade_id':'Grade',
          } 
 class AcademicsInfo(ModelForm):
+    document = forms.CharField(required=False)
+    note = forms.CharField(required=False)
+    emp_id = forms.CharField(required=False)
     class Meta(ModelForm):
         model = AcademicsMast
-        fields = ('doman_of_study','name_of_board','complete_in','gared','document','note',)
+        fields = ('doman_of_study','name_of_board','complete_in','gared','document','note','emp_id')
         labels = {
              'doman_of_study':'Domain Of Study',
              'name_of_board':'Name Of Board',
@@ -50,12 +55,15 @@ class AcademicsInfo(ModelForm):
              'gared':'Gared',
              'document':'Document',    
              'note':'Note',
-            } 
+             } 
 
 class BankInfo(ModelForm):
+    document = forms.CharField(required=False)
+    note = forms.CharField(required=False)
+    emp_id = forms.CharField(required=False)
     class Meta(ModelForm):
         model = BankDetails
-        fields =('accou_hol_name','accou_num','bank_name','ifsc_code','branch','document','note')
+        fields =('accou_hol_name','accou_num','bank_name','ifsc_code','branch','document','note','emp_id')
         labels={
             'accou_hol_name':'Account Holder Name',
             'accou_num':'Account Number',

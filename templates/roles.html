@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">
+            <div class="card mt-5 ml-3 mr-3 overflow-hidden">							
+            	<div class="mt-5 mb-5 ml-3 mr-3">
+	            	<table class="table table-stripped table-bordered dataTable no-footer">
+	            		<tr>
+	            			<th>SN.</th>
+	            			<th>Username</th>
+	            			<th>Name</th>
+	            			<th>Email </th>
+	            			<th>Status</th>
+	            			<th>Is_Employee</th>
+	            			<th>Is_HR</th>
+	            			<th>Is_Manager</th>
+	            			<th>Is_Admin</th>
+	            		</tr>
+	            		{% for all_user in users %}
+	            		<tr>
+	            			<td>{{forloop.counter}}</td>	
+	            			<td>{{all_user.username}}</td>	
+	            			<td>{{all_user.first_name}} {{all_user.last_name}}</td>	
+	            			<td>{{all_user.email}}</td>
+	            			<td>{% if all_user.is_active %} Active {% else %} Deactive {% endif %}</td>
+	            			<td class="text-center"><input {% if all_user.is_employee %} checked="true" {%  endif %} type="checkbox" data-role="is_employee" data-id="{{all_user.id}}" class="styled roles "></td>
+	            			<td class="text-center"><input data-role="is_hr" {% if all_user.is_hr %} checked="true" {%  endif %} data-id="{{all_user.id}}" type="checkbox" class="styled roles"></td>
+	            			<td class="text-center"><input data-role="is_manager" {% if all_user.is_manager %} checked="true" {%  endif %} data-id="{{all_user.id}}" type="checkbox" class="styled roles"></td>
+	            			<td class="text-center"><input data-role="is_admin" {% if all_user.is_admin %} checked="true" {%  endif %} data-id="{{all_user.id}}" type="checkbox" class="styled roles"></td>
+	            			<!-- <td>
+	            				<a href="delete_employee/{{users.id}}" class="fa fa-trash mr-1"></a>
+	            				<a href="edit_employee/{{users.id}}" class="fas fa-edit"></a>
+	            				<a href="showTabs/main/{{users.id}}"  class="fa fa-eye"></a>
+	            			</td> -->
+	            		</tr>
+	            		{% endfor %}
+	            	</table>	
+	            </div>  
+        </div>
+    </div>    
+</div>
+
+<script>
+	 $(document).ready(function(){
+     $('.datepicker').datepicker({dateFormat: 'yy-mm-dd' });
+  });
+
+	var token = '{{csrf_token}}';
+
+$(document).on('change','.roles',function(){
+	let id = $(this).attr('data-id');
+	let role = $(this).attr('data-role');	
+	 if($(this).is(":checked")){       	 	
+		$.ajax({
+			headers: { "X-CSRFToken": token },
+			type:'POST',
+			url:'/employee/assign', 
+			data:{'id':id,'role':role,'status':'1'},
+			success:function(data, textStatus, xhr){
+				if(xhr.status == 200){
+            $.notify("Role atteched", "success");
+             // location.reload();
+          }
+			}
+		})
+    }else{
+        $.ajax({
+				headers: { "X-CSRFToken": token },
+				type:'POST',
+				url:'/employee/assign', 
+				data:{'id':id,'role':role,'status':'0'},
+				success:function(data, textStatus, xhr){
+					if(xhr.status == 200){
+	            $.notify("Role remove", "success");
+	             // location.reload();
+	          }
+				}
+			})
+    }
+
+})
+</script>
+
+{% endblock content %}   

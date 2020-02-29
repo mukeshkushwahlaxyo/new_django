@@ -10,7 +10,12 @@ class Is_staff(AbstractUserRole):
         'edit_patient_file': True,
     }
 
-class Admin(AbstractUserRole):
+class Admin(AbstractUserRole):	
     available_permissions = {
         'drop_tables': True,
     }    
+
+class Superadmin(AbstractUserRole):
+    available_permissions = {
+        'drop_tables': True,
+    }      

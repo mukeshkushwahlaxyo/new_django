@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-12">        	
+		    	{% if messages %}
+			    	<div class="alert alert-success text-center">
+			    		<button type="button" class="close" data-dismiss="alert">&times;</button>
+						    {% for message in messages %}
+						    <span class="" {% if message.tags %} class=""{% endif %}>{{ message }}</span>
+						    {% endfor %}
+
+			    	</div>
+					{% endif %}
+            <div class="card mt-5 ml-3 mr-3 overflow-hidden">							
+            	<div class="mt-5 mb-5 ml-3 mr-3">
+					<div class="mb-3">
+						<a href="{% url 'emp_status.create' %}" style="color:white;" class="btn btn-primary">Create</a>
+				</div>
+	            	<table class="table table-stripped table-bordered dataTable no-footer">
+	            		<tr>
+	            			<th>SN.</th>
+	            			<th>Status Name</th>
+	            			<th>Description</th>
+	            			<th>Action</th>	            			
+	            		</tr>
+	            		{% for Data in data %}
+	            		<tr>
+	            			<td>{{forloop.counter}}</td>
+	            			<td>{{Data.name}}</td>
+	            			<td>{{Data.description|default_if_none:''}}</td>
+	            			<td>
+	            				<a href="{% url 'emp_status.edit' Data.id %}" class="fas fa-edit"></a>
+	            				<a href="{% url 'emp_status.delete' Data.id %}" class="fa fa-trash ml-1 text-danger"></a>
+	            			</td>
+	            		</tr>
+	            		{% endfor %}	            		
+	            	</table>	
+	            </div>  
+        </div>
+    </div>    
+</div>
+{% endblock content %}   

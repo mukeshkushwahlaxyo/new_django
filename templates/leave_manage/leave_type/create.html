@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">	
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+      <div class="card mt-5 ml-3 mr-3 overflow-hidden">							
+       	<div class="mt-3 mb-5 ml-3 mr-3">
+       		<div class="row">
+						<div class="col-sm-12  mb-3 ">
+							<a href="{% url 'leavetype' %}" style="color:white;" class="btn btn-primary float-right">Back</a>
+						</div>
+					</div>
+					<form method="post" action="{% url 'leavetype.create' %}">
+						{% csrf_token %} 
+						<div class="row">
+							<div class="col-sm-6">
+								<label>{{form.name.label}}</label>
+								<input type="text" class="form-control" name="{{form.name.name}}">
+								<p style="" class="text-denger">{{form.name.errors}}</p>
+							</div>
+							<div class="col-sm-6"> 
+								<label>{{form.total.label}}</label>
+								<input type="text" class="form-control" name="{{form.total.name}}">
+								<p style="" class="text-denger">{{form.total.errors}}</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label>{{form.leave_per_year.label}}</label>
+								<input type="text" class="form-control" name="{{form.leave_per_year.name}}">
+								<p style="" class="text-denger">{{form.leave_per_year.errors}}</p>
+							</div>
+							<div class="col-sm-6"> 
+								<label>{{form.generate_days.label}}</label>
+								<input type="text" class="form-control" name="{{form.generate_days.name}}">
+								<p style="" class="text-denger">{{form.generate_days.errors}}</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label>{{form.max_apply_once.label}}</label>
+								<input type="text" class="form-control" name="{{form.max_apply_once.name}}">
+								<p style="" class="text-denger">{{form.max_apply_once.errors}}</p>
+							</div>
+							<div class="col-sm-6"> 
+								<label>{{form.min_apply_once.label}}</label>
+								<input type="text" class="form-control" name="{{form.min_apply_once.name}}">
+								<p style="" class="text-denger">{{form.min_apply_once.errors}}</p>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<label>{{form.max_days_month.label}}</label>
+								<input type="text" class="form-control" name="{{form.max_days_month.name}}">
+								<p style="" class="text-denger">{{form.max_days_month.errors}}</p>
+							</div>
+							<div class="col-sm-6">
+								<label>{{form.max_apply_month.label}}</label>
+								<input type="text" class="form-control" name="{{form.max_apply_month.name}}">
+								<p style="" class="text-denger">{{form.max_apply_month.errors}}</p>
+							</div>
+							<div class="col-sm-6"> 
+								<label>{{form.max_apply_year.label}}</label>
+								<input type="text" class="form-control" name="{{form.max_apply_year.name}}">
+								<p style="" class="text-denger">{{form.max_apply_year.errors}}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="btn-group" data-toggle="buttons">
+						      <label class="btn btn-warning btn-rounded active form-check-label mr-2">
+						        <input type="checkbox" class="form-check-input" name="{{form.carry_forward.name}}" hidden="" checked autocomplete="off"> {{form.carry_forward.label}}
+						        <i class="far fa-gem ml-2"></i>
+						      </label>
+
+						      <label class="btn btn-warning btn-rounded form-check-label mr-2">
+						        <input type="checkbox" class="form-check-input" name="{{form.docs_required.name}}" hidden="" autocomplete="off">{{form.docs_required.label}}
+						        <i class="fas fa-user ml-2"></i>
+						      </label>
+
+						      <label class="btn btn-warning btn-rounded form-check-label mr-2">
+						        <input type="checkbox" class="form-check-input" name="{{form.without_pay.name}}" hidden="" autocomplete="off"> {{form.without_pay.label}}
+						        <i class="fas fa-code ml-2"></i>
+						      </label>
+
+						      <label class="btn btn-warning btn-rounded form-check-label mr-2">
+						        <input type="checkbox" class="form-check-input" name="{{form.dont_show.name}}" hidden="" autocomplete="off"> {{form.dont_show.label}}
+						        <i class="fas fa-code ml-2"></i>
+						      </label>
+
+						    </div>
+						  </div>
+						  <div class="col-sm-4"></div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 text-center mt-3">
+								<input type="submit" value="Submit" class="btn btn-primary" name="submit">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>	
+{% endblock %}
+<style type="text/css">
+    .errorlist li {
+        color: red; 
+        font-size:10px;
+        list-style-type: none;
+    }
+</style>
